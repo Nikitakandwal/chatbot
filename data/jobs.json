@@ -1,0 +1,117 @@
+{
+    "Data Analyst/Scientist": [
+        {
+            "title": "Data Analyst",
+            "responsibilities": "Analyzing data, generating reports, identifying trends and patterns, providing insights to support decision-making.",
+            "qualifications": "Bachelor's degree in mathematics, statistics, computer science, or related field, experience in data analysis, proficiency in data analysis tools (e.g., Excel, SQL).",
+            "openings": 20,
+            "required_skills": ["Excel", "SQL", "Python"]
+        },
+        {
+            "title": "Data Scientist",
+            "responsibilities": "Building predictive models, analyzing large datasets, and developing machine learning algorithms to solve business problems.",
+            "qualifications": "Master's degree in data science, computer science, or related field, experience with machine learning frameworks (e.g., TensorFlow, PyTorch).",
+            "openings": 15,
+            "required_skills": ["Python", "R", "Machine Learning", "Statistics"]
+        },
+        {
+            "title": "Business Intelligence Analyst",
+            "responsibilities": "Creating and maintaining dashboards, generating business insights, and supporting data-driven decision-making.",
+            "qualifications": "Bachelor's degree in business, data analytics, or related field, experience with BI tools (e.g., Tableau, Power BI).",
+            "openings": 10,
+            "required_skills": ["SQL", "Tableau", "Power BI"]
+        }
+    ],
+    "Marketing": [
+        {
+            "title": "Marketing Coordinator",
+            "responsibilities": "Supporting marketing campaigns, coordinating events, and assisting with social media management.",
+            "qualifications": "Bachelor's degree in marketing, communications, or related field, strong organizational and communication skills.",
+            "openings": 5,
+            "required_skills": ["Social Media", "Communication", "Event Planning"]
+        },
+        {
+            "title": "Digital Marketing Specialist",
+            "responsibilities": "Developing and executing digital marketing strategies, managing online advertising campaigns, and analyzing web traffic.",
+            "qualifications": "Bachelor's degree in marketing, digital media, or related field, experience with digital marketing tools (e.g., Google Analytics, SEO).",
+            "openings": 8,
+            "required_skills": ["SEO", "Google Analytics", "Content Marketing"]
+        },
+        {
+            "title": "Content Marketing Manager",
+            "responsibilities": "Creating and managing content strategies, overseeing content production, and optimizing content for SEO.",
+            "qualifications": "Bachelor's degree in marketing, communications, or related field, experience in content creation and management.",
+            "openings": 4,
+            "required_skills": ["Content Creation", "SEO", "Project Management"]
+        }
+    ],
+    "Software Developer": [
+        {
+            "title": "Front-End Developer",
+            "responsibilities": "Developing and maintaining user-facing features, ensuring the technical feasibility of UI/UX designs.",
+            "qualifications": "Bachelor's degree in computer science, software engineering, or related field, experience with front-end technologies (e.g., HTML, CSS, JavaScript).",
+            "openings": 12,
+            "required_skills": ["HTML", "CSS", "JavaScript"]
+        },
+        {
+            "title": "Back-End Developer",
+            "responsibilities": "Developing server-side logic, integrating databases, and ensuring high performance and responsiveness.",
+            "qualifications": "Bachelor's degree in computer science, software engineering, or related field, experience with back-end technologies (e.g., Node.js, Python, Java).",
+            "openings": 10,
+            "required_skills": ["Node.js", "Python", "SQL"]
+        },
+        {
+            "title": "Full Stack Developer",
+            "responsibilities": "Developing both client and server software, designing overall architecture, and ensuring application performance.",
+            "qualifications": "Bachelor's degree in computer science, software engineering, or related field, experience with both front-end and back-end technologies.",
+            "openings": 7,
+            "required_skills": ["HTML", "CSS", "JavaScript", "Python", "SQL"]
+        }
+    ],
+    "Architect": [
+        {
+            "title": "Design Architect",
+            "responsibilities": "Creating building designs, preparing detailed drawings, and ensuring designs comply with regulatory standards.",
+            "qualifications": "Bachelor's degree in architecture, proficiency in design software (e.g., AutoCAD, Revit).",
+            "openings": 5,
+            "required_skills": ["AutoCAD", "Revit", "SketchUp"]
+        },
+        {
+            "title": "Project Architect",
+            "responsibilities": "Managing architectural projects, coordinating with stakeholders, and overseeing construction phases.",
+            "qualifications": "Bachelor's degree in architecture, experience in project management and construction.",
+            "openings": 3,
+            "required_skills": ["Project Management", "AutoCAD", "Construction"]
+        },
+        {
+            "title": "Landscape Architect",
+            "responsibilities": "Designing outdoor spaces, planning landscape projects, and ensuring environmental sustainability.",
+            "qualifications": "Bachelor's degree in landscape architecture, experience in landscape design and environmental planning.",
+            "openings": 4,
+            "required_skills": ["Landscape Design", "AutoCAD", "Sustainability"]
+        }
+    ],
+    "Management": [
+        {
+            "title": "Project Manager",
+            "responsibilities": "Planning and overseeing projects, ensuring they are completed on time and within budget, and coordinating team efforts.",
+            "qualifications": "Bachelor's degree in business management or related field, experience in project management.",
+            "openings": 10,
+            "required_skills": ["Project Management", "Leadership", "Communication"]
+        },
+        {
+            "title": "Operations Manager",
+            "responsibilities": "Managing day-to-day operations, improving operational systems, and ensuring efficiency and productivity.",
+            "qualifications": "Bachelor's degree in business administration, experience in operations management.",
+            "openings": 6,
+            "required_skills": ["Operations Management", "Process Improvement", "Leadership"]
+        },
+        {
+            "title": "HR Manager",
+            "responsibilities": "Overseeing recruitment, managing employee relations, and developing HR policies.",
+            "qualifications": "Bachelor's degree in human resources or related field, experience in HR management.",
+            "openings": 5,
+            "required_skills": ["HR Management", "Recruitment", "Employee Relations"]
+        }
+    ]
+}

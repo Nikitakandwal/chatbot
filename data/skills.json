@@ -1,0 +1,7 @@
+{
+    "Marketing": ["SEO", "Content Creation", "Social Media", "PPC", "Analytics"],
+    "Software Developer": ["Python", "Java", "C++", "JavaScript", "SQL"],
+    "Architect": ["AutoCAD", "3D Modeling", "Project Management", "Revit", "Construction"],
+    "Management": ["Leadership", "Communication", "Project Management", "Strategic Planning", "Negotiation"],
+    "Data Analyst/Scientist": ["Excel", "SQL", "Python", "R", "Machine Learning"]
+}
