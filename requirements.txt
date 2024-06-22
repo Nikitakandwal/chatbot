@@ -1,5 +1,4 @@
-flask
-Flask
+flask 
 pdfminer.six==20221105
 python-docx==0.8.11
 spacy==3.5.3
