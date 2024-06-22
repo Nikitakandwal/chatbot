@@ -1,8 +1,5 @@
 services:
   - type: web
     name: my-chatbot
-    env: python
-    buildCommand: |
-      apt-get update && apt-get install -y build-essential libatlas-base-dev
-      pip install -r requirements.txt
-    startCommand: python app.py
+    env: docker
+    dockerfilePath: ./Dockerfile
