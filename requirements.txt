@@ -1,3 +1,4 @@
+flask
 Flask
 pdfminer.six==20221105
 python-docx==0.8.11
