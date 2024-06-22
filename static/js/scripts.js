@@ -60,15 +60,18 @@ function uploadResume(domain) {
                 contentType: 'application/json',
                 data: JSON.stringify({ domain: domain }),
                 success: function(jobs) {
-                    let jobList = jobs.map(job => `
-                        <div class="chat-message bot">
-                            <b>Job Title:</b> ${job.title}<br>
-                            <b>Responsibilities:</b> ${job.responsibilities}<br>
-                            <b>Qualifications:</b> ${job.qualifications}<br>
-                            <b>Openings:</b> ${job.openings}<br>
-                            <button type="button" onclick='selectJob("${job.title}", ${JSON.stringify(job.required_skills)}, "${file_path.replace(/\\/g, '\\\\')}")'>Select</button>
-                        </div>
-                    `).join('');
+                    let jobList = `<div class="chat-message bot">Here are the openings in the selected domain:</div>`;
+                    jobs.forEach(job => {
+                        jobList += `
+                            <div class="chat-message bot job-listing">
+                                <b>Job Title:</b> ${job.title}<br>
+                                <b>Responsibilities:</b> ${job.responsibilities}<br>
+                                <b>Qualifications:</b> ${job.qualifications}<br>
+                                <b>Openings:</b> ${job.openings}<br>
+                                <button type="button" onclick='selectJob("${job.title}", ${JSON.stringify(job.required_skills)}, "${file_path.replace(/\\/g, '\\\\')}")'>Check Match</button>
+                            </div>
+                        `;
+                    });
                     $('#chat-box').append(jobList);
                     scrollChatToBottom();
                 },
@@ -96,7 +99,7 @@ function selectJob(jobTitle, requiredSkills, filePath) {
         success: function(data) {
             hideTypingIndicator();
             let matchPercentage = data.match_percentage;
-            let matchMessage = `<div class="chat-message bot">Your profile matches ${matchPercentage.toFixed(2)}% with the job: ${jobTitle}</div>`;
+            let matchMessage = `<div class="chat-message bot">Your profile matches <b>${matchPercentage.toFixed(2)}%</b> with the job: ${jobTitle}</div>`;
             $('#chat-box').append(matchMessage);
             scrollChatToBottom();
         },

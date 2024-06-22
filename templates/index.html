@@ -6,6 +6,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <!-- Add this inside the <head> tag of index.html -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const particleContainer = document.createElement('div');
+        particleContainer.classList.add('particle-container');
+        document.body.appendChild(particleContainer);
+
+        const particleCount = 50; // Number of particles
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.width = `${Math.random() * 10 + 5}px`;
+            particle.style.height = `${Math.random() * 10 + 5}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.animationDelay = `${Math.random() * 20}s`;
+            particleContainer.appendChild(particle);
+        }
+    });
+</script>
+
 </head>
 <body>
     <div class="chat-container">

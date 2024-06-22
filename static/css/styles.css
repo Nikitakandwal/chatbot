@@ -1,32 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Add this to the styles.css */
+
+/* Add to styles.css */
+
 body {
-    background-color: #2B2B2B; /* Lighter Dark Grey */
+    background: linear-gradient(45deg, #2B2B2B, #1A1A1A, #333333, #1F1F1F);
+    background-size: 600% 600%;
+    animation: gradientAnimation 15s ease infinite;
     color: #FFFFFF; /* White text color for the body */
+    font-family: 'Roboto', sans-serif; /* Professional font */
+    overflow: hidden; /* Hide overflow to keep particles within the viewport */
 }
 
-.chat-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background: #333333; /* Dark Grey */
-    padding: 0;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #FFFFFF; /* Ensuring text inside container is white */
-    border: 1px solid #666666; /* Light Grey border */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
+
+/* Particle Animation */
+
+.particle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through particles */
+    z-index: -1; /* Ensure particles are behind other content */
+}
+
+.particle {
+    position: absolute;
+    background-color: #FF6347; /* Semi-transparent white */
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleAnimation 20s linear infinite;
+}
+
+@keyframes particleAnimation {
+    0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50vw) scale(1);
+        opacity: 0;
+    }
+}
+
+ 
 
 .chat-header {
     display: flex;
     align-items: center;
-    background-color: #333333; /* Dark Grey */
+    background-color: #2A2A2A; /* Darker than Dark Grey */
     padding: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     color: #FFFFFF; /* White text color */
     border-bottom: 1px solid #666666; /* Light Grey border for header bottom */
+    font-weight: 500; /* Medium weight for header text */
 }
 
 .chat-header .logo img {
-    width: 40px;
+    width: 50px;
     height: 40px;
     margin-right: 10px;
 }
@@ -41,63 +80,117 @@ body {
     font-size: 0.9em;
 }
 
+.chat-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: rgba(51, 51, 51, 0.9); /* Dark Grey with transparency */
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* More prominent shadow */
+    color: #FFFFFF; /* Ensuring text inside container is white */
+    border: 1px solid #666666; /* Light Grey border */
+}
+
 .chat-box {
     height: 560px;
     overflow-y: auto;
     padding: 10px;
-    background-color: #2B2B2B; /* Lighter Dark Grey */
+    background-color: rgba(31, 31, 31, 0.8); /* Darker background with transparency */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     display: flex;
     flex-direction: column;
     color: #FFFFFF; /* White text color for messages */
+    font-size: 0.95em; /* Slightly smaller text for messages */
 }
+.chat-box {
+    scroll-behavior: smooth; /* Add smooth scrolling */
+}
+
+
+/* Custom scrollbar styles */
+.chat-box::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: transparent; /* Make track background transparent */
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent thumb */
+    border-radius: 4px; /* Rounded edges for thumb */
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5); /* Slightly less transparent on hover */
+}
+
+/* Other CSS styles remain unchanged */
 
 .chat-message {
     margin: 10px 0;
     padding: 10px;
-    border-radius: 10px;
     display: inline-block;
     max-width: 80%;
     border: 1px solid #666666; /* Light Grey border for messages */
+    font-size: 1em; /* Standard font size */
+    line-height: 1.5; /* Improved line spacing */
+    font-weight: 400; /* Normal weight for messages */
+    word-wrap: break-word; /* Ensure long words are wrapped */
 }
 
 .chat-message.bot {
-    background-color: #1C1C1C; /* Almost Black */
+    background-color: #1A1A1A; /* Darker than Almost Black */
     color: #FFFFFF; /* White text color for bot messages */
+    border-radius: 10px 10px 10px 0; /* No radius on top-left */
+    width: fit-content; /* Adjust the width automatically */
 }
 
 .chat-message.user {
-    background-color: #333333; /* Dark Grey for user messages */
+    background-color: #2E2E2E; /* Darker than Dark Grey */
     color: #FFFFFF; /* White text color */
     text-align: right;
     align-self: flex-end;
+    border-radius: 10px 10px 0 10px; /* No radius on top-right */
+    width: fit-content; /* Adjust the width automatically */
 }
 
+/* Add transparent style to buttons */
 .chat-message button, .chat-message .custom-file-upload label {
-    background-color: #555555; /* Medium Grey */
-    color: #FFFFFF; /* White text color for buttons */
-    border: 1px solid #666666; /* Light Grey border for buttons */
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    color: #FFFFFF; /* White text color */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Semi-transparent border */
     padding: 10px 20px;
     margin: 5px 0;
     border-radius: 5px;
     cursor: pointer;
     display: inline-block;
+    font-weight: 700; /* Bold weight for buttons */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
 }
 
 .chat-message button:hover, .chat-message .custom-file-upload label:hover {
-    background-color: #FF6347; /* Tomato color for hover effect */
-    border-color: #FF6347; /* Same as background color to ensure consistency */
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly less transparent on hover */
+    border-color: #FFFFFF; /* White border on hover */
+    color: #FF6347; /* Tomato color for text on hover */
 }
+
+
 
 .custom-file-upload {
     position: relative;
-    display: inline-block;
+    display: block; /* Make sure the custom file upload container is a block element */
     margin-top: 10px;
 }
 
 .custom-file-upload input[type="file"] {
     display: none;
+}
+
+/* Display file upload button below text */
+.custom-file-upload p {
+    margin: 0 0 10px 0; /* Margin for spacing */
 }
 
 .typing-indicator {
@@ -120,3 +213,20 @@ a {
 a:hover {
     color: #FF6347; /* Tomato color for hover effect */
 }
+
+/* Sidebar styling for transparency */
+.sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 250px; /* Adjust the width as needed */
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 50% transparency */
+    transition: background 0.3s;
+}
+
+.sidebar:hover {
+    background: rgba(0, 0, 0, 0.7); /* Slightly less transparent on hover */
+}
+
+
