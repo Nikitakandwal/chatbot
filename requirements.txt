@@ -5,6 +5,4 @@ spacy==3.5.3
 scikit-learn==1.2.2
 sentence-transformers==2.2.2
 numpy==1.21.0
-
-
-
+Flask

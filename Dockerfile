@@ -14,6 +14,9 @@ COPY . /app
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+# List installed packages to verify Flask installation
+RUN pip list
+
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
