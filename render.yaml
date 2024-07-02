@@ -1,5 +1,0 @@
-services:
-  - type: web
-    name: my-chatbot
-    env: docker
-    dockerfilePath: ./Dockerfile
