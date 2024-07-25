@@ -1,8 +1,8 @@
-flask 
-pdfminer.six==20221105
-python-docx==0.8.11
-spacy==3.5.3
-scikit-learn==1.2.2
-sentence-transformers==2.2.2
-numpy==1.21.0
-Flask
+Flask==3.0.3 
+pdfminer.six==20231228
+python-docx==1.1.2
+sentence-transformers==3.0.1
+scikit-learn==1.4.1.post1
+pandas==2.2.1 
+spacy==3.7.5
+pydantic==2.8.2

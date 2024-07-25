@@ -9,15 +9,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')  # Use absolute path
-
-# Ensure 'uploads' folder exists
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')   
+ 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
-
-# Load larger spaCy model
-nlp = spacy.load('en_core_web_lg')
-# Load Sentence Transformers model
+ 
+nlp = spacy.load('en_core_web_lg') 
 sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def extract_text_from_pdf(file_path):
@@ -83,16 +80,13 @@ def calculate_match():
             text = extract_text_from_docx(file_path)
         
         user_skills = extract_skills(text)
-        
-        # Combine the skills into sentences
+         
         required_skills_sentence = ' '.join(required_skills)
         user_skills_sentence = ' '.join(user_skills)
-        
-        # Get embeddings
+         
         required_skills_embedding = sbert_model.encode([required_skills_sentence])
         user_skills_embedding = sbert_model.encode([user_skills_sentence])
-        
-        # Calculate cosine similarity
+         
         cosine_sim = cosine_similarity(required_skills_embedding, user_skills_embedding).flatten()[0]
         
         match_percentage = round(cosine_sim * 100, 2)
