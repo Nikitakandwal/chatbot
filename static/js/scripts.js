@@ -88,31 +88,8 @@ function uploadResume(domain) {
     });
 }
 
-function selectJob(jobTitle, requiredSkills, filePath) {
-    addUserMessage(jobTitle);
-    showTypingIndicator();
-    $.ajax({
-        type: 'POST',
-        url: '/calculate_match',
-        contentType: 'application/json',
-        data: JSON.stringify({ file_path: filePath, required_skills: requiredSkills }),
-        success: function(data) {
-            hideTypingIndicator();
-            let matchPercentage = data.match_percentage;
-            let matchMessage = `<div class="chat-message bot">Your profile matches <b>${matchPercentage.toFixed(2)}%</b> with the job: ${jobTitle}</div>`;
-            $('#chat-box').append(matchMessage);
-            scrollChatToBottom();
-        },
-        error: function(error) {
-            console.error("Error calculating match percentage:", error);
-            let errorMessage = `<div class="chat-message bot">Error calculating match percentage: ${error.responseJSON.error}</div>`;
-            $('#chat-box').append(errorMessage);
-            hideTypingIndicator();
-            scrollChatToBottom();
-        }
-    });
-}
-
+ 
+ 
 function addUserMessage(message) {
     let userMessage = `<div class="chat-message user">${message}</div>`;
     $('#chat-box').append(userMessage);
@@ -131,4 +108,67 @@ function hideTypingIndicator() {
 
 function scrollChatToBottom() {
     $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+}
+
+
+function selectJob(jobTitle, requiredSkills, filePath) {
+    addUserMessage(jobTitle);
+    showTypingIndicator();
+    $.ajax({
+        type: 'POST',
+        url: '/calculate_match',
+        contentType: 'application/json',
+        data: JSON.stringify({ file_path: filePath, required_skills: requiredSkills }),
+        success: function(data) {
+            hideTypingIndicator();
+            let matchPercentage = data.match_percentage;
+            let matchMessage = `
+                <div class="chat-message bot">
+                    Your profile matches <b>${matchPercentage.toFixed(2)}%</b> with the job: ${jobTitle}
+                    <span class="suggestion-bulb" data-file-path="${filePath.replace(/\\/g, '\\\\')}" data-required-skills='${JSON.stringify(requiredSkills)}'>💡</span>
+                </div>`;
+            $('#chat-box').append(matchMessage);
+            scrollChatToBottom();
+        },
+        error: function(error) {
+            console.error("Error calculating match percentage:", error);
+            let errorMessage = `<div class="chat-message bot">Error calculating match percentage: ${error.responseJSON.error}</div>`;
+            $('#chat-box').append(errorMessage);
+            hideTypingIndicator();
+            scrollChatToBottom();
+        }
+    });
+}
+ 
+
+$(document).on('click', '.suggestion-bulb', function() {
+    let filePath = $(this).data('file-path');
+    let requiredSkills = $(this).data('required-skills');
+    showSuggestions(filePath, requiredSkills);
+});
+
+function showSuggestions(filePath, requiredSkills) {
+    console.log("Bulb clicked! File path:", filePath);
+    console.log("Required skills:", requiredSkills);
+ 
+    let suggestionsMessage = `
+        <div class="suggestion-box">
+            <span class="close-btn" onclick="closeSuggestionBox()">×</span>
+            <div class="suggestion-title">Here are some suggestions to improve your resume:</div>
+            <ul>
+                <li>Consider learning Python.</li>
+                <li>Improve your communication skills.</li>
+                <li>Gain experience with cloud platforms like AWS.</li>
+            </ul>
+        </div>
+    `;
+ 
+    $('.chat-message.bot').last().append(suggestionsMessage);
+    $('.suggestion-box').fadeIn(300);
+}
+
+function closeSuggestionBox() {
+    $('.suggestion-box').fadeOut(300, function() {
+        $(this).remove();
+    });
 }

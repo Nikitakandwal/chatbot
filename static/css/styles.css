@@ -230,3 +230,61 @@ a:hover {
 }
 
 
+/* Suggestion Bulb Icon */
+.suggestion-bulb {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #FF6347; /* Tomato color for the bulb */
+    font-size: 20px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.suggestion-bulb:hover {
+    transform: scale(1.2);
+    color: #FF4500; /* Darker tomato color on hover */
+}
+
+
+
+
+/* Suggestion Box Styles */
+.suggestion-box {
+    display: none;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-title {
+    font-weight: bold;
+    color:#000;
+    margin-bottom: 10px;
+}
+
+.suggestion-box ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.suggestion-box li {
+    margin-bottom: 5px;
+    color:#000;
+}
+
+.close-btn {
+    float: right;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+}
+
+.close-btn:hover {
+    color: #555;
+}
