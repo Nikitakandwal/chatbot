@@ -47,12 +47,10 @@ def extract_skills(text):
     doc = nlp(text)
     skills = set()
     
-    # Extract skills using SpaCy NER
     for ent in doc.ents:
         if ent.label_ == 'SKILL':
             skills.add(ent.text.lower())
     
-    # Match skills from the predefined skill list
     for skill_list in skills_data.values():
         for skill in skill_list:
             if skill.lower() in text.lower():
@@ -60,11 +58,28 @@ def extract_skills(text):
     
     return list(skills)
 
+# Page Routes
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('home.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/reviews')
+def reviews():
+    return render_template('reviews.html')
+
+@app.route('/chatbot')
+def chatbot():
+    return render_template('chatbot.html')
+
+# API Routes
 @app.route('/upload_resume', methods=['POST'])
 def upload_resume():
     if 'file' not in request.files:
@@ -95,10 +110,6 @@ def get_jobs():
     matching_jobs = jobs_data.get(domain, [])
     return jsonify(matching_jobs)
 
- 
-# Load a pre-trained SBERT model (fine-tuned on job descriptions if available)
-sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
-
 def generate_suggestions(user_skills, required_skills, similarity_threshold=0.7):
     """
     Generate suggestions for the user to improve their resume.
@@ -106,9 +117,8 @@ def generate_suggestions(user_skills, required_skills, similarity_threshold=0.7)
     suggestions = []
     
     if not user_skills or not required_skills:
-        return suggestions  # Return empty list if either parameter is None
+        return suggestions
     
-    # Find missing skills
     missing_skills = set(required_skills) - set(user_skills)
     
     if missing_skills:
@@ -118,14 +128,13 @@ def generate_suggestions(user_skills, required_skills, similarity_threshold=0.7)
             "skills": list(missing_skills)
         })
     
-    # Find similar skills that can be improved
     user_skills_embeddings = sbert_model.encode(user_skills)
     required_skills_embeddings = sbert_model.encode(required_skills)
     
     similarity_matrix = cosine_similarity(user_skills_embeddings, required_skills_embeddings)
     for i, user_skill in enumerate(user_skills):
         max_sim = np.max(similarity_matrix[i])
-        if max_sim < similarity_threshold:  # Adjustable threshold
+        if max_sim < similarity_threshold:
             suggestions.append({
                 "type": "improve_skill",
                 "message": f"Consider improving your skill in '{user_skill}' to better match the job requirements.",
@@ -146,8 +155,6 @@ def calculate_match():
             text = extract_text_from_docx(file_path)
         
         user_skills = extract_skills(text)
-        
-        # Calculate match percentage
         match_percentage = calculate_skill_match(user_skills, required_skills)
         
         return jsonify({"match_percentage": match_percentage})
@@ -162,15 +169,12 @@ def calculate_skill_match(user_skills, required_skills):
     if not user_skills or not required_skills:
         return 0.0
     
-    # Encode skills
     user_skills_embeddings = sbert_model.encode(user_skills)
     required_skills_embeddings = sbert_model.encode(required_skills)
     
-    # Normalize embeddings
     user_skills_embeddings = user_skills_embeddings / np.linalg.norm(user_skills_embeddings, axis=1, keepdims=True)
     required_skills_embeddings = required_skills_embeddings / np.linalg.norm(required_skills_embeddings, axis=1, keepdims=True)
     
-    # Calculate cosine similarity
     similarity_matrix = cosine_similarity(user_skills_embeddings, required_skills_embeddings)
     max_similarities = np.max(similarity_matrix, axis=1)
     match_percentage = np.mean(max_similarities) * 100
@@ -199,17 +203,12 @@ def get_suggestions():
     user_skills = data.get('user_skills')
     required_skills = data.get('required_skills')
     
-    print("Received user_skills:", user_skills)  # Debugging
-    print("Received required_skills:", required_skills)  # Debugging
-    
     try:
         suggestions = generate_suggestions(user_skills, required_skills)
-        print("Suggestions generated:", suggestions)  # Debugging
         return jsonify({"suggestions": suggestions})
     except Exception as e:
         logger.error(f"Error generating suggestions: {e}")
         return jsonify({"error": str(e)}), 500
-    
 
 @app.route('/extract_skills_from_resume', methods=['POST'])
 def extract_skills_from_resume():
@@ -221,14 +220,11 @@ def extract_skills_from_resume():
         elif file_path.endswith('.docx'):
             text = extract_text_from_docx(file_path)
         
-        skills = extract_skills(text)  # Use the existing extract_skills function
+        skills = extract_skills(text)
         return jsonify({"skills": skills})
     except Exception as e:
         logger.error(f"Error extracting skills: {e}")
         return jsonify({"error": str(e)}), 500
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)
-

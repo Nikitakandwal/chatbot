@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews - ResumeSync.ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ResumeSync.ai</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+        </ul>
+        <div class="theme-dropdown">
+            <button class="theme-button">Theme</button>
+            <div class="dropdown-content">
+                <a href="#" class="theme-option" data-theme="theme-light">Light</a>
+                <a href="#" class="theme-option" data-theme="theme-dark">Dark</a>
+                <a href="#" class="theme-option" data-theme="theme-blue">Blue</a>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>User Reviews</h1>
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="reviewer-name">John Doe</span>
+                    <span class="review-rating">★★★★★</span>
+                </div>
+                <p class="review-text">"Resume Bot helped me land my dream job! The suggestions were spot-on and the interface is so user-friendly."</p>
+                <span class="review-date">March 15, 2025</span>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="reviewer-name">Jane Smith</span>
+                    <span class="review-rating">★★★★☆</span>
+                </div>
+                <p class="review-text">"Great tool for job seekers. The match percentage feature is really helpful, though I'd love more domain options."</p>
+                <span class="review-date">March 10, 2025</span>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="reviewer-name">Alex Johnson</span>
+                    <span class="review-rating">★★★★★</span>
+                </div>
+                <p class="review-text">"Fantastic experience! The chatbot made the process fun and the resume analysis was incredibly accurate."</p>
+                <span class="review-date">March 5, 2025</span>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

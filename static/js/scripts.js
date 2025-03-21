@@ -236,6 +236,40 @@ $(document).ready(function() {
         $('body').removeClass('theme-light theme-dark theme-blue').addClass(selectedTheme);
         localStorage.setItem('chatbot-theme', selectedTheme); // Save theme preference
     });
-
-    displayInitialMessage();
+ 
 });
+$(document).ready(function() {
+    // Theme handling
+    const savedTheme = localStorage.getItem('chatbot-theme') || 'theme-dark';
+    $('body').addClass(savedTheme);
+
+    // Toggle dropdown on theme button click
+    $('.theme-button').click(function(e) {
+        e.preventDefault();
+        $(this).parent('.theme-dropdown').toggleClass('active');
+    });
+
+    // Handle theme option clicks
+    $('.theme-option').click(function(e) {
+        e.preventDefault();
+        const selectedTheme = $(this).data('theme');
+        $('body').removeClass('theme-light theme-dark theme-blue').addClass(selectedTheme);
+        localStorage.setItem('chatbot-theme', selectedTheme);
+        $('.theme-dropdown').removeClass('active');
+    });
+
+    // Close dropdown if clicking outside
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.theme-dropdown').length) {
+            $('.theme-dropdown').removeClass('active');
+        }
+    });
+
+    // Display initial message on chatbot page only, once
+    if (window.location.pathname === '/chatbot') {
+        if ($('#chat-box .chat-message.bot').length === 0) {
+            displayInitialMessage();
+        }
+    }
+});
+ 

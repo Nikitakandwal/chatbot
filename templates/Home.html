@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - ResumeSync.ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ResumeSync.ai</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+        </ul>
+        <div class="theme-dropdown">
+            <button class="theme-button">Theme</button>
+            <div class="dropdown-content">
+                <a href="#" class="theme-option" data-theme="theme-light">Light</a>
+                <a href="#" class="theme-option" data-theme="theme-dark">Dark</a>
+                <a href="#" class="theme-option" data-theme="theme-blue">Blue</a>
+            </div>
+        </div>
+        </div>
+    </nav>
+    <div class="home-content">
+        <h1>Welcome to Resume Bot</h1>
+        <p>Analyze your resume and find your perfect job match!</p>
+        <a href="/chatbot" class="try-button">Try the Chatbot</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

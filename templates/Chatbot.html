@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot - ResumeSync.ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ResumeSync.ai</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+        </ul>
+        <div class="theme-dropdown">
+            <button class="theme-button">Theme</button>
+            <div class="dropdown-content">
+                <a href="#" class="theme-option" data-theme="theme-light">Light</a>
+                <a href="#" class="theme-option" data-theme="theme-dark">Dark</a>
+                <a href="#" class="theme-option" data-theme="theme-blue">Blue</a>
+            </div>
+        </div>
+    </nav>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            </div>
+            <h1>ResumeSync.ai</h1>
+            <div class="status"></div>
+        </div>
+        <div id="chat-box" class="chat-box"></div>
+    </div>
+</body>
+</html>
