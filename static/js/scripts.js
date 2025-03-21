@@ -1,6 +1,4 @@
-$(document).ready(function() {
-    displayInitialMessage();
-});
+
 
 function displayInitialMessage() {
     let initialMessage = `
@@ -147,24 +145,27 @@ $(document).on('click', '.suggestion-bulb', function() {
     showSuggestions(filePath, requiredSkills);
 });
 
-function showSuggestions(filePath, requiredSkills) {
-    console.log("Bulb clicked! File path:", filePath);
-    console.log("Required skills:", requiredSkills);
- 
-    let suggestionsMessage = `
-        <div class="suggestion-box">
-            <span class="close-btn" onclick="closeSuggestionBox()">×</span>
-            <div class="suggestion-title">Here are some suggestions to improve your resume:</div>
-            <ul>
-                <li>Consider learning Python.</li>
-                <li>Improve your communication skills.</li>
-                <li>Gain experience with cloud platforms like AWS.</li>
-            </ul>
-        </div>
-    `;
- 
-    $('.chat-message.bot').last().append(suggestionsMessage);
-    $('.suggestion-box').fadeIn(300);
+
+
+function extractUserSkills(filePath) {
+    return new Promise((resolve, reject) => {
+        showTypingIndicator();
+        $.ajax({
+            type: 'POST',
+            url: '/extract_skills_from_resume',
+            contentType: 'application/json',
+            data: JSON.stringify({ file_path: filePath }),
+            success: function(data) {
+                hideTypingIndicator();
+                resolve(data.skills); // Resolve with the extracted skills
+            },
+            error: function(error) {
+                hideTypingIndicator();
+                console.error("Error extracting skills:", error);
+                reject(error); // Reject with the error
+            }
+        });
+    });
 }
 
 function closeSuggestionBox() {
@@ -172,3 +173,69 @@ function closeSuggestionBox() {
         $(this).remove();
     });
 }
+
+
+async function showSuggestions(filePath, requiredSkills) {
+    console.log("Bulb clicked! File path:", filePath);
+    console.log("Required skills:", requiredSkills);
+
+    try {
+        const userSkills = await extractUserSkills(filePath); // Wait for skills to be extracted
+        console.log("Extracted user skills:", userSkills);
+
+        showTypingIndicator();
+        $.ajax({
+            type: 'POST',
+            url: '/get_suggestions',
+            contentType: 'application/json',
+            data: JSON.stringify({ 
+                user_skills: userSkills, 
+                required_skills: requiredSkills 
+            }),
+            success: function(data) {
+                hideTypingIndicator();
+                let suggestions = data.suggestions;
+                let suggestionsMessage = `
+                    <div class="suggestion-box">
+                        <span class="close-btn" onclick="closeSuggestionBox()">×</span>
+                        <div class="suggestion-title">Here are some suggestions to improve your resume:</div>
+                        <ul>`;
+                
+                suggestions.forEach(suggestion => {
+                    if (suggestion.type === "missing_skills") {
+                        suggestionsMessage += `<li>You are missing the following skills: ${suggestion.skills.join(', ')}</li>`;
+                    } else if (suggestion.type === "improve_skill") {
+                        suggestionsMessage += `<li>Consider improving your skill in '${suggestion.skill}' to better match the job requirements.</li>`;
+                    }
+                });
+
+                suggestionsMessage += `</ul></div>`;
+                $('.chat-message.bot').last().append(suggestionsMessage);
+                $('.suggestion-box').fadeIn(300);
+            },
+            error: function(error) {
+                console.error("Error fetching suggestions:", error);
+                hideTypingIndicator();
+            }
+        });
+    } catch (error) {
+        console.error("Error extracting user skills:", error);
+        hideTypingIndicator();
+    }
+}
+
+$(document).ready(function() {
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('chatbot-theme') || 'theme-dark';
+    $('body').addClass(savedTheme);
+    $('#theme-select').val(savedTheme);
+
+    // Handle theme change
+    $('#theme-select').change(function() {
+        const selectedTheme = $(this).val();
+        $('body').removeClass('theme-light theme-dark theme-blue').addClass(selectedTheme);
+        localStorage.setItem('chatbot-theme', selectedTheme); // Save theme preference
+    });
+
+    displayInitialMessage();
+});

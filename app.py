@@ -95,25 +95,7 @@ def get_jobs():
     matching_jobs = jobs_data.get(domain, [])
     return jsonify(matching_jobs)
 
-@app.route('/get_suggestions', methods=['POST'])
-def get_suggestions():
-    data = request.json
-    user_skills = data.get('user_skills')
-    required_skills = data.get('required_skills')
-    
-    print("Received user_skills:", user_skills)  # Debugging
-    print("Received required_skills:", required_skills)  # Debugging
-    
-    try:
-        suggestions = generate_suggestions(user_skills, required_skills)
-        print("Suggestions generated:", suggestions)  # Debugging
-        return jsonify({"suggestions": suggestions})
-    except Exception as e:
-        logger.error(f"Error generating suggestions: {e}")
-        return jsonify({"error": str(e)}), 500
-
-  
-
+ 
 # Load a pre-trained SBERT model (fine-tuned on job descriptions if available)
 sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
 
@@ -151,7 +133,6 @@ def generate_suggestions(user_skills, required_skills, similarity_threshold=0.7)
             })
     
     return suggestions
-
 
 @app.route('/calculate_match', methods=['POST'])
 def calculate_match():
@@ -212,5 +193,42 @@ def predict_domain(text):
     
     return predicted_domain
 
+@app.route('/get_suggestions', methods=['POST'])
+def get_suggestions():
+    data = request.json
+    user_skills = data.get('user_skills')
+    required_skills = data.get('required_skills')
+    
+    print("Received user_skills:", user_skills)  # Debugging
+    print("Received required_skills:", required_skills)  # Debugging
+    
+    try:
+        suggestions = generate_suggestions(user_skills, required_skills)
+        print("Suggestions generated:", suggestions)  # Debugging
+        return jsonify({"suggestions": suggestions})
+    except Exception as e:
+        logger.error(f"Error generating suggestions: {e}")
+        return jsonify({"error": str(e)}), 500
+    
+
+@app.route('/extract_skills_from_resume', methods=['POST'])
+def extract_skills_from_resume():
+    file_path = request.json.get('file_path')
+    
+    try:
+        if file_path.endswith('.pdf'):
+            text = extract_text_from_pdf(file_path)
+        elif file_path.endswith('.docx'):
+            text = extract_text_from_docx(file_path)
+        
+        skills = extract_skills(text)  # Use the existing extract_skills function
+        return jsonify({"skills": skills})
+    except Exception as e:
+        logger.error(f"Error extracting skills: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
