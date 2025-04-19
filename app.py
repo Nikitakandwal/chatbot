@@ -12,7 +12,7 @@ import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')   
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'Uploads')   
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
@@ -78,6 +78,15 @@ def reviews():
 @app.route('/chatbot')
 def chatbot():
     return render_template('chatbot.html')
+
+# New route for Community page
+@app.route('/community')
+def community():
+    return render_template('community.html')
+
+@app.route('/jobs')
+def jobs():
+    return render_template('jobs.html')
 
 # API Routes
 @app.route('/upload_resume', methods=['POST'])

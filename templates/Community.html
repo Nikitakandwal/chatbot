@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About - ResumeSync.ai</title>
+    <title>Community - ResumeSync.ai</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -25,12 +25,21 @@
             </div>
         </div>
     </nav>
-    <div class="content">
-        <h1>About ResumeSync</h1>
-        <p>ResumeSync is an innovative AI-powered chatbot designed to empower job seekers by analyzing their resumes and matching them with the perfect career opportunities. Whether you're a marketer, software developer, architect, manager, or data enthusiast, our intelligent system provides tailored insights to help you stand out in today’s competitive job market.</p>
-        <p>Built with cutting-edge technology by a team passionate about career growth, ResumeSync bridges the gap between your skills and your dream job. Let us help you take the next step in your professional journey!</p>
+    <div class="community-content">
+        <h1>Join Our Career Community</h1>
+        <div class="community-container">
+            <div class="post-feed" id="post-feed">
+                <!-- Posts will be populated here -->
+            </div>
+            <div class="hashtag-sidebar">
+                <h2>Trending Hashtags</h2>
+                <div class="hashtag-list" id="hashtag-list">
+                    <!-- Hashtags will be populated here -->
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/community.js') }}"></script>
 </body>
 </html>

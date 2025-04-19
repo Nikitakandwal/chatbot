@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jobs - ResumeSync.ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ResumeSync.ai</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/jobs">Jobs</a></li>
+            <li><a href="/community">Community</a></li>
+        </ul>
+        <div class="theme-dropdown">
+            <button class="theme-button">Theme</button>
+            <div class="dropdown-content">
+                <a href="#" class="theme-option" data-theme="theme-light">Light</a>
+                <a href="#" class="theme-option" data-theme="theme-dark">Dark</a>
+                <a href="#" class="theme-option" data-theme="theme-blue">Blue</a>
+            </div>
+        </div>
+    </nav>
+    <div class="jobs-content">
+        <h1>Find Your Dream Job</h1>
+        <div class="jobs-container">
+            <div class="jobs-list" id="jobs-list">
+                <!-- Job cards will be populated here -->
+            </div>
+            <div class="filter-sidebar">
+                <h2>Filter Jobs</h2>
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label for="domain">Domain:</label>
+                        <select id="domain" class="filter-select">
+                            <option value="">All Domains</option>
+                            <option value="Software Development">Software Development</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Product Management">Product Management</option>
+                            <option value="Marketing">Marketing</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="work-type">Work Type:</label>
+                        <select id="work-type" class="filter-select">
+                            <option value="">All</option>
+                            <option value="Remote">Remote</option>
+                            <option value="Onsite">Onsite</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="ctc">Expected CTC (LPA):</label>
+                        <select id="ctc" class="filter-select">
+                            <option value="">All</option>
+                            <option value="0-10">0-10 LPA</option>
+                            <option value="10-20">10-20 LPA</option>
+                            <option value="20-30">20-30 LPA</option>
+                            <option value="30+">30+ LPA</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="profile">Profile:</label>
+                        <select id="profile" class="filter-select">
+                            <option value="">All Profiles</option>
+                            <option value="Entry Level">Entry Level</option>
+                            <option value="Mid Level">Mid Level</option>
+                            <option value="Senior Level">Senior Level</option>
+                        </select>
+                    </div>
+                    <button id="apply-filters" class="filter-button">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jobs.js') }}"></script>
+</body>
+</html>
